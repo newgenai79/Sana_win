@@ -7,7 +7,7 @@
 <div align="center">
   <a href="https://github.com/NVlabs/Sana">Sana main repository</a> &ensp;
 </div>
-
+<p>&nbsp;</p>
 <p align="center" border-raduis="10px">
   <a href="https://youtu.be/JORL_67HzJI">Windows installation tutorial</a> &ensp;
 </p>
