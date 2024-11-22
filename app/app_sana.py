@@ -31,7 +31,6 @@ from PIL import Image
 from torchvision.utils import make_grid, save_image
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from app import safety_check
 from app.sana_pipeline import SanaPipeline
 
 MAX_SEED = np.iinfo(np.int32).max
@@ -194,14 +193,6 @@ if torch.cuda.is_available():
     pipe.from_pretrained(model_path)
     pipe.register_progress_bar(gr.Progress())
 
-    # safety checker
-    safety_checker_tokenizer = AutoTokenizer.from_pretrained(args.shield_model_path)
-    safety_checker_model = AutoModelForCausalLM.from_pretrained(
-        args.shield_model_path,
-        device_map="auto",
-        torch_dtype=torch.bfloat16,
-    ).to(device)
-
 
 def save_image_sana(img, seed="", save_img=False):
     unique_name = f"{str(uuid.uuid4())}_{seed}.png"
@@ -244,8 +235,6 @@ def generate(
     seed = int(randomize_seed_fn(seed, randomize_seed))
     generator = torch.Generator(device=device).manual_seed(seed)
     print(f"PORT: {DEMO_PORT}, model_path: {model_path}, time_times: {TEST_TIMES}")
-    if safety_check.is_dangerous(safety_checker_tokenizer, safety_checker_model, prompt, threshold=0.2):
-        prompt = "A red heart."
 
     print(prompt)
 
@@ -485,4 +474,4 @@ with gr.Blocks(css=css) as demo:
     )
 
 if __name__ == "__main__":
-    demo.queue(max_size=20).launch(server_name="0.0.0.0", server_port=DEMO_PORT, debug=True, share=True)
+    demo.queue(max_size=20).launch(server_name="127.0.0.1", server_port=DEMO_PORT, debug=False, share=False)
