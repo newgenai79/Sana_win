@@ -9,5 +9,5 @@
 </div>
 
 <p align="center" border-raduis="10px">
-  Windows installation tutorial
+  <a href="https://youtu.be/JORL_67HzJI">Windows installation tutorial</a> &ensp;
 </p>
