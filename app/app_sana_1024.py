@@ -158,7 +158,7 @@ def apply_style(style_name: str, positive: str, negative: str = "") -> tuple[str
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", type=str, default="configs\sana_config\1024ms\Sana_1600M_img1024.yaml" help="config")
+    parser.add_argument("--config", type=str, default="configs\sana_config\1024ms\Sana_1600M_img1024.yaml", help="config")
     parser.add_argument(
         "--model_path",
         nargs="?",
